@@ -22,8 +22,35 @@ namespace MidtermExam.Prob01
         /// </remarks>
         public int AS01_CountVowels(Queue<string> alphabets)
         {
-            // TODO: เขียนคำตอบแทนคำสั่ง throw exception ด้านล่าง
-            throw new NotImplementedException();
+           // Edge Case: ถ้าคิวเป็น null หรือคิวว่าง ให้คืนค่า 0
+            if (alphabets == null || alphabets.Count == 0)
+            {
+                return 0;
+            }
+
+            int count = 0;
+            int totalItems = alphabets.Count;
+
+            // วนลูปดึงข้อมูลออกเพื่อเช็ก แล้วนำใส่กลับเข้าคิวเดิมตามลำดับ FIFO
+            for (int i = 0; i < totalItems; i++)
+            {
+                string item = alphabets.Dequeue();
+
+                // ตรวจนับเฉพาะสระภาษาอังกฤษตัวพิมพ์เล็ก
+                if (item == "a" || item == "e" || item == "i" || item == "o" || item == "u")
+                {
+                    count++;
+                }
+
+                // ใส่กลับเข้าท้ายคิวเพื่อคงลำดับและข้อมูลเดิมไว้
+                alphabets.Enqueue(item);
+
+            }
+
+            return count; // คืนจำนวนสระทั้งหมด
+
+            
+        
         }
     }
 }
